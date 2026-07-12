@@ -2,6 +2,27 @@
 
 These browser scenarios are explanatory research artifacts grounded in the CERBERUS v3.5 manuscript and the July 2026 Stress Suite / Structural FCOI planning update. They do not extend the project's evidence boundary.
 
+## Satellite operations suite
+
+The satellite suite maps CERBERUS onto three initial mission targets:
+
+1. **Autonomous collision avoidance** — the Pilot may optimize maneuver timing and mission objectives, while the Watchdog enforces declared keep-out geometry, delta-v, attitude, power, and post-burn recovery envelopes.
+2. **Deployment sequencing** — the Pilot may propose release order and timing, while the Watchdog enforces minimum separation, attitude corridor, power reserve, and one-release-at-a-time rules.
+3. **Fault recovery during communications loss** — the Pilot may diagnose and propose isolation or reconfiguration, but blackout policy caps authority and the Watchdog rejects actions outside the declared recovery envelope.
+
+Across all three cases:
+
+- **Pilot:** remains strategically capable but cannot directly command safety-critical actuators, relax constraints, or manufacture assurance evidence.
+- **Vigil:** monitors pessimistic FCOI pressure, independent sensor agreement, command provenance, and safety-invariant witness health. Unknown, stale, coupled, or unauthenticated evidence cannot create permission.
+- **Watchdog:** remains the deterministic actuation gate and admits only proposals inside a declared mission envelope.
+- **Anchor:** owns the non-overridable minimum action set: power-positive attitude, thermal survival, bounded orientation, beaconing, safe communications posture, and mission-specific inhibits.
+
+Authority contracts immediately when the pessimistic independence budget decays. The browser mapping uses A3/A2/A1/A0 for full, restricted, advisory-only, and Anchor-only authority. The communications-loss recovery case is capped at A2 even when onboard evidence remains healthy.
+
+Promotion is intentionally asymmetric. Recovery requires fresh independent evidence, healthy marginals, hysteresis, and a configured dwell period. A single authenticated command or one-shot all-clear is not sufficient.
+
+The satellite suite is an architecture demonstration. Its thresholds, sensor-agreement score, FCOI mapping, and mission envelopes are illustrative and are not flight values.
+
 ## Communications blackout survival run
 
 The blackout scenario models loss of authenticated ground contact while onboard assurance remains responsible for safe behavior.
@@ -37,6 +58,7 @@ These scenarios do not establish:
 
 - operational detector performance;
 - realistic spacecraft telemetry robustness;
+- certified collision-avoidance or deployment envelopes;
 - certification, flight readiness, TRL, or a completed safety case;
 - complete causal models or probabilistic FCOI;
 - safety of active sentinel injection; or
