@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Inject a shared CERBERUS page switcher into deployed HTML files.
+"""Inject a shared CERBERUS page launcher into deployed HTML files.
 
 The source pages intentionally keep their page-specific layouts. During the Pages
-build this script adds one accessible, fixed navigation surface to each major
-interface so every page can reach every other page.
+build this script adds one accessible, static launch deck near the top of each
+major interface so every page can reach every other page without relying on a
+scrolling rail or hidden overflow control.
 """
 
 from __future__ import annotations
@@ -29,48 +30,62 @@ ITEMS = (
         "index.html",
         "01",
         "Observatory",
-        "Core model + FCOI",
+        "Core model, Vigil and FCOI",
+        "Explore model",
     ),
     (
         "incidents",
         "scenarios.html",
         "02",
         "Incident Theatre",
-        "Mission failure cases",
+        "Satellite, blackout and HAL cases",
+        "Run scenarios",
     ),
     (
         "workbench",
         "assurance-workbench.html",
         "03",
         "Assurance Workbench",
-        "Policies + evidence",
+        "Policies, evidence and replay",
+        "Inspect decisions",
     ),
     (
         "kernel",
         "flight-kernel.html",
         "04",
-        "Flight Kernel",
-        "Executable reference",
+        "Flight Reference Kernel",
+        "Executable C11 authority reference",
+        "Run the kernel",
     ),
 )
 
 
 def navigation(current: str) -> str:
     links: list[str] = []
-    for key, href, index, title, description in ITEMS:
+    for key, href, index, title, description, action in ITEMS:
         current_attr = ' aria-current="page"' if key == current else ""
         links.append(
-            f'  <a href="{href}"{current_attr}>'
-            f'<strong><span class="nav-index">{index}</span>{title}</strong>'
-            f'<small>{description}</small></a>'
+            f'    <a href="{href}" data-page="{key}"{current_attr}>'
+            f'<span class="nav-index">{index}</span>'
+            f'<span class="nav-copy"><strong>{title}</strong>'
+            f'<small>{description}</small></span>'
+            f'<span class="nav-action">{action} <b aria-hidden="true">→</b></span>'
+            f'</a>'
         )
 
     return "\n".join(
         (
             NAV_START,
-            '<nav class="cerberus-page-nav" aria-label="CERBERUS page access">',
+            '<section class="cerberus-launcher" aria-labelledby="cerberus-launcher-title">',
+            '  <div class="cerberus-launcher-head">',
+            '    <p>Whole-site access</p>',
+            '    <div><h2 id="cerberus-launcher-title">Choose a CERBERUS interface.</h2>',
+            '    <span>Every major page is visible here—no horizontal scrolling or hidden menu.</span></div>',
+            '  </div>',
+            '  <nav class="cerberus-page-nav" aria-label="CERBERUS page access">',
             *links,
-            "</nav>",
+            "  </nav>",
+            "</section>",
             NAV_END,
         )
     )
@@ -94,10 +109,10 @@ def inject(path: Path, current: str) -> None:
         if count != 1:
             raise ValueError(f"{path}: could not replace existing navigation")
     else:
-        body = re.search(r"<body(?:\s[^>]*)?>", text, flags=re.IGNORECASE)
-        if body is None:
-            raise ValueError(f"{path}: missing <body>")
-        insertion = body.end()
+        main = re.search(r"<main(?:\s[^>]*)?>", text, flags=re.IGNORECASE)
+        if main is None:
+            raise ValueError(f"{path}: missing <main>")
+        insertion = main.end()
         text = text[:insertion] + "\n" + nav + text[insertion:]
 
     path.write_text(text, encoding="utf-8")
