@@ -1,0 +1,145 @@
+/* Global page switcher injected into every deployed CERBERUS interface. */
+:root {
+  --cerb-nav-night: #090c0a;
+  --cerb-nav-paper: #ece7da;
+  --cerb-nav-muted: #9aa198;
+  --cerb-nav-acid: #caff5b;
+  --cerb-nav-rust: #ef6b50;
+  --cerb-nav-line: rgba(236, 231, 218, 0.18);
+}
+
+body {
+  padding-bottom: 106px !important;
+}
+
+.cerberus-page-nav {
+  position: fixed;
+  z-index: 10000;
+  right: 18px;
+  bottom: 18px;
+  left: 18px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+  width: min(980px, calc(100vw - 36px));
+  margin: 0 auto;
+  padding: 8px;
+  border: 1px solid var(--cerb-nav-line);
+  background: rgba(9, 12, 10, 0.94);
+  box-shadow: 0 20px 65px rgba(0, 0, 0, 0.42);
+  color: var(--cerb-nav-paper);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.cerberus-page-nav::before {
+  content: "CERBERUS / PAGE ACCESS";
+  position: absolute;
+  right: 10px;
+  bottom: calc(100% + 7px);
+  padding: 3px 7px;
+  border: 1px solid var(--cerb-nav-line);
+  background: var(--cerb-nav-night);
+  color: var(--cerb-nav-muted);
+  font: 800 0.52rem/1.2 Inter, ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: 0.14em;
+}
+
+.cerberus-page-nav a {
+  min-width: 0;
+  padding: 10px 12px;
+  border: 1px solid transparent;
+  background: rgba(255, 255, 255, 0.035);
+  color: inherit;
+  text-decoration: none;
+  transition: transform 140ms ease, border-color 140ms ease, background 140ms ease;
+}
+
+.cerberus-page-nav a:hover,
+.cerberus-page-nav a:focus-visible {
+  transform: translateY(-2px);
+  border-color: var(--cerb-nav-acid);
+  background: rgba(202, 255, 91, 0.08);
+  outline: none;
+}
+
+.cerberus-page-nav a[aria-current="page"] {
+  border-color: var(--cerb-nav-acid);
+  background: var(--cerb-nav-acid);
+  color: #171a16;
+}
+
+.cerberus-page-nav strong,
+.cerberus-page-nav small {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cerberus-page-nav strong {
+  font: 850 0.7rem/1.2 Inter, ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: 0.055em;
+  text-transform: uppercase;
+}
+
+.cerberus-page-nav small {
+  margin-top: 3px;
+  color: var(--cerb-nav-muted);
+  font: 600 0.56rem/1.2 Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+.cerberus-page-nav a[aria-current="page"] small {
+  color: rgba(23, 26, 22, 0.7);
+}
+
+.cerberus-page-nav .nav-index {
+  margin-right: 6px;
+  color: var(--cerb-nav-rust);
+}
+
+.cerberus-page-nav a[aria-current="page"] .nav-index {
+  color: #171a16;
+}
+
+@media (max-width: 760px) {
+  body {
+    padding-bottom: 176px !important;
+  }
+
+  .cerberus-page-nav {
+    right: 8px;
+    bottom: 8px;
+    left: 8px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: calc(100vw - 16px);
+    gap: 5px;
+    padding: 6px;
+  }
+
+  .cerberus-page-nav::before {
+    display: none;
+  }
+
+  .cerberus-page-nav a {
+    padding: 9px 10px;
+  }
+
+  .cerberus-page-nav strong {
+    font-size: 0.64rem;
+  }
+
+  .cerberus-page-nav small {
+    font-size: 0.52rem;
+  }
+}
+
+@media print {
+  body {
+    padding-bottom: 0 !important;
+  }
+
+  .cerberus-page-nav {
+    display: none !important;
+  }
+}
