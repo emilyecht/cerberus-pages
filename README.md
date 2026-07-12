@@ -10,8 +10,9 @@ This repository presents browser-based explanatory simulations for:
 - Structural FCOI minimal-cut-set overlap and near-match reporting;
 - the planned Stress Suite v1 scenario families;
 - a satellite operations suite covering autonomous collision avoidance, deployment sequencing, and fault recovery during communications loss;
-- a communications-blackout survival simulation; and
-- a HAL-inspired fictional containment case that tests whether authority separation actually prevents harmful actuation.
+- a communications-blackout survival simulation;
+- a HAL-inspired fictional containment case that tests whether authority separation actually prevents harmful actuation; and
+- an assurance workbench for inspectable mission policies, decision traces, provenance, architecture comparisons, claims mapping, and HIL planning.
 
 ## Incident Theatre
 
@@ -25,6 +26,21 @@ The satellite suite makes the mission mapping explicit:
 - **Anchor** preserves attitude, power, thermal limits, beaconing, and a safe communications posture whenever authority contracts.
 
 Restoration is sequential and requires sustained fresh independent evidence rather than a one-shot all-clear.
+
+## Assurance Workbench
+
+Open [`assurance-workbench.html`](assurance-workbench.html) for the integrated review surface. It includes:
+
+- an exportable evidence ledger and printable run report;
+- a monolith vs. nominal layering vs. CERBERUS comparison;
+- an illustrative mission-profile and authority-policy builder;
+- a failure gallery and claims-to-evidence map;
+- a hardware-in-the-loop roadmap and scenario replay timeline;
+- an A3–A0 authority-envelope visualizer;
+- a command-provenance inspector;
+- a research hub and collaboration needs page.
+
+All generated policies, thresholds, command decisions, and reports are explicitly illustrative and remain inside the repository's evidence boundary.
 
 ## Evidence boundary
 
