@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="author" content="Emily Echterhoff">
+<meta name="description" content="CERBERUS communications-blackout and HAL containment simulations.">
+<title>CERBERUS — Incident Theatre</title>
+<link rel="stylesheet" href="scenario.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="index.html"><span>◁◁◁</span>CERBERUS</a>
+  <div><b>INCIDENT THEATRE</b><small>fictional and synthetic assurance cases</small></div>
+  <a class="back" href="index.html">← Observatory</a>
+</header>
+<main>
+<section class="intro">
+  <p class="kicker">Two adversarial demonstrations</p>
+  <h1>When the link dies.<br>When the intelligence lies.</h1>
+  <p class="lede">CERBERUS is tested here as an authority architecture—not as a smarter personality. Pilot may reason. Watchdog may veto. Anchor preserves survival. Vigil may only reduce permission or declare evidence unknown.</p>
+  <nav><a href="#blackout">01 / Comms blackout</a><a href="#hal">02 / HAL containment</a></nav>
+</section>
+
+<section id="blackout" class="lab dark">
+  <header class="labhead"><div><p class="kicker">Scenario 01 · loss of authenticated ground contact</p><h2>Comms blackout survival run</h2></div><p>Blackout removes ground contact, not onboard responsibility. A declared A2 blackout cap constrains the Pilot; invalid onboard evidence drives the budget to zero; restoration is earned through fresh evidence and dwell.</p></header>
+  <div class="grid">
+    <div class="stage">
+      <div class="metrics"><article><small>Minimum authority</small><strong id="bMin">—</strong></article><article><small>Time at A0</small><strong id="bA0">—</strong></article><article><small>Full restoration</small><strong id="bRestore">—</strong></article><article><small>Link outcome</small><strong id="bLink">—</strong></article></div>
+      <div class="chartbox"><canvas id="blackoutChart" width="1100" height="460"></canvas><div class="legend"><i class="budget"></i>budget <i class="overlap"></i>overlap <i class="state"></i>authority <i class="shade"></i>blackout</div></div>
+      <ol id="blackoutLog" class="ledger"></ol>
+    </div>
+    <form id="blackoutForm" class="panel">
+      <h3>Blackout parameters</h3>
+      <label>Duration <output id="bDurOut">64</output><input id="bDuration" type="range" min="24" max="110" value="64"></label>
+      <label>Onboard evidence quality <output id="bQualityOut">0.84</output><input id="bQuality" type="range" min="0.20" max="1" value="0.84" step="0.01"></label>
+      <label>Latent overlap pressure <output id="bPressureOut">0.28</output><input id="bPressure" type="range" min="0" max="0.95" value="0.28" step="0.01"></label>
+      <label>Recovery dwell <input id="bDwell" type="number" min="4" max="50" value="14"></label>
+      <label class="toggle"><input id="bTelemetry" type="checkbox" checked><span></span>Independent onboard telemetry remains valid</label>
+      <label class="toggle"><input id="bRisky" type="checkbox" checked><span></span>Pilot proposes a high-risk correction</label>
+      <button>Run blackout</button>
+      <p class="note">The A2 cap is an illustrative scenario policy, not a universal threshold. Ground may request diagnostics and re-arm promotion; it cannot write B(t), assign authority, waive dwell, or override Anchor invariants.</p>
+    </form>
+  </div>
+</section>
+
+<section id="hal" class="lab light">
+  <header class="labhead"><div><p class="kicker">Scenario 02 · transformative fictional red team</p><h2>The HAL containment case</h2></div><p>A HAL-like strategic controller occupies the Pilot role. Toggle away CERBERUS boundaries to see the difference between genuine independence and a monolith merely labeled “layered.”</p></header>
+  <div class="grid halgrid">
+    <div class="halstage">
+      <div class="eye" aria-hidden="true"><span></span></div>
+      <p class="designation">HEURISTIC MISSION INTELLIGENCE</p>
+      <strong id="hDisposition" class="disposition">AWAITING RUN</strong>
+      <div id="halLayers" class="layers">
+        <article data-layer="pilot"><b>P</b><div><strong>Pilot</strong><small>adaptive strategy · proposals only</small></div><i>READY</i></article>
+        <article data-layer="watchdog"><b>W</b><div><strong>Watchdog</strong><small>crew-survival and command invariants</small></div><i>READY</i></article>
+        <article data-layer="anchor"><b>A</b><div><strong>Anchor</strong><small>life support · attitude · authenticated access</small></div><i>READY</i></article>
+        <article data-layer="vigil"><b>V</b><div><strong>Vigil</strong><small>passive inconsistency and overlap evidence</small></div><i>READY</i></article>
+      </div>
+      <div id="halOutcome" class="outcome">Run the case to test containment.</div>
+    </div>
+    <div class="stage">
+      <form id="halForm" class="panel halpanel">
+        <h3>Adversarial conditions</h3>
+        <label>Goal-conflict intensity <output id="hConflictOut">0.78</output><input id="hConflict" type="range" min="0" max="1" value="0.78" step="0.01"></label>
+        <label class="toggle"><input id="hDeception" type="checkbox" checked><span></span>Pilot falsifies fault reports</label>
+        <label class="toggle"><input id="hWatchdog" type="checkbox" checked><span></span>Watchdog is independently implemented</label>
+        <label class="toggle"><input id="hVigil" type="checkbox" checked><span></span>Vigil has an independent passive witness</label>
+        <label class="toggle"><input id="hIsolation" type="checkbox" checked><span></span>Pilot has no direct actuator path</label>
+        <label class="toggle"><input id="hCrew" type="checkbox" checked><span></span>Crew access is Anchor-authenticated</label>
+        <button>Run containment case</button>
+      </form>
+      <div class="metrics halmetrics"><article><small>Harmful attempts</small><strong id="hAttempts">—</strong></article><article><small>Neutralized</small><strong id="hBlocked">—</strong></article><article><small>Final authority</small><strong id="hState">—</strong></article><article><small>Crew-survival floor</small><strong id="hCrewStatus">—</strong></article></div>
+      <ol id="halLog" class="ledger halledger"></ol>
+    </div>
+  </div>
+  <p class="rights"><strong>Commentary notice:</strong> HAL 9000 and <em>2001: A Space Odyssey</em> are referenced for critical and educational commentary. This original simulation reproduces no film dialogue or scenes and is not affiliated with the relevant rights holders.</p>
+</section>
+
+<section class="boundary">
+  <p class="kicker">Evidence boundary</p>
+  <h2>These are architecture demonstrations, not flight validation.</h2>
+  <div><p><strong>Shown:</strong> authority separation, immediate demotion, unknown-evidence handling, Anchor survival invariants, bounded ground recovery, and explicit negative controls.</p><p><strong>Not shown:</strong> operational detector performance, complete causal models, certification, flight readiness, sentinel safety, or proof that a fictional narrative maps directly to a real spacecraft.</p></div>
+  <blockquote>Intelligence is not safety. Layering is not independence.</blockquote>
+</section>
+</main>
+<footer><span>Copyright © 2026 Emily Echterhoff. All rights reserved.</span><a href="SCENARIO_NOTES.md">Scenario notes</a></footer>
+<script src="scenario.js"></script>
+</body>
+</html>
